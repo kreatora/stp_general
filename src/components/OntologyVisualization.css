@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.viewport {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background: #f0f2f5;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-top: 10px;
+    cursor: grab;
+}
+
+.visualization-container {
+    width: 2184px;  /* Increased from 1680px by 30% */
+    height: 1456px; /* Increased from 1120px by 30% */
+    position: absolute;
+    overflow: visible;
+    background: transparent;
+    background-image: radial-gradient(#ffffff 1px, transparent 1px);
+    background-size: 20px 20px;
+    transform-origin: 0 0;
+    left: 0;
+    top: 0;
+}
+
+.card {
+    position: absolute;
+    width: 250px;
+    height: 182px; /* 1456px / 8 = 182px */
+    background: rgb(242, 245, 229);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    transition: all 0.3s ease;
+    border: 3px solid rgb(45, 124, 45);
+    z-index: 1;
+    cursor: pointer;  /* Changed from move to pointer */
+    overflow: auto;
+    user-select: none;
+    pointer-events: auto;  /* Ensure cards can still be clicked */
+}
+
+.card-definition {
+    font-size: 14px;  /* Reduced from 16px */
+    color: #333;
+    line-height: 1.4;
+    padding-right: 25px;  /* Reduced from 30px */
+}
+
+.card.hidden {
+    display: none;
+}
+
+.expand-icon {
+    position: absolute;
+    right: 6px;   /* Reduced from 8px */
+    top: 6px;     /* Reduced from 8px */
+    width: 22px;  /* Reduced from 28px */
+    height: 22px; /* Reduced from 28px */
+    background: #2980b9;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;  /* Reduced from 16px */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: 2px solid white;
+}
+
+.expand-icon::after {
+    content: '▼';
+    display: block;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.card.collapsed .expand-icon::after {
+    transform: rotate(-90deg);
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+/* Remove unused styles */
+.card-title, .card-id {
+    display: none;
+}
+
+.connection-line {
+    position: absolute;
+    height: 2px;
+    transform-origin: 0 0;
+    pointer-events: none;
+    z-index: 0; /* Ensure lines are below cards */
+}
+
+/* Add connection line color classes with more distinct colors */
+.connection-line-level-0 {
+    background: #001f3f; /* Navy - darkest */
+    height: 3px;
+}
+.connection-line-level-1 {
+    background: #0074D9; /* Blue */
+    height: 2.5px;
+}
+.connection-line-level-2 {
+    background: #39CCCC; /* Teal */
+    height: 2px;
+}
+.connection-line-level-3 {
+    background: #01FF70; /* Green */
+    height: 2px;
+}
+.connection-line-level-4 {
+    background: #FFDC00; /* Yellow */
+    height: 1.5px;
+}
+.connection-line-level-5 {
+    background: #FF851B; /* Orange - lightest */
+    height: 1.5px;
+}
+
+.zoom-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;  /* Changed back to flex */
+    gap: 8px;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.zoom-button {
+    display: none;  /* Hide zoom buttons */
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    background: #2980b9;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.zoom-button:hover {
+    background: #3498db;
+}
+
+.reset-button {
+    display: flex !important;  /* Force display for reset button */
+    width: auto;
+    padding: 0 12px;
+    background: #27ae60;
+    font-weight: bold;
+}
+
+.reset-button:hover {
+    background: #2ecc71;
+}
+
+.card.root-card {
+    display: block !important; /* Always show root card */
+}
+
+.card.root-card .card-definition {
+    display: block !important; /* Always show root card content */
+}
+
+/* Update banner styles */
+.left-banner {
+    position: fixed;
+    top: 0;       /* Changed from 40px */
+    left: 0;      /* Changed from 40px */
+    z-index: 1001;
+    max-width: 200px;
+    padding: 10px;  /* Added padding instead of margin */
+}
+
+.top-banner {
+    position: fixed;
+    top: 10px;  /* Changed from 40px to 10px (30px higher) */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001;
+    max-width: 400px;
+}
+
+.zoom-level {
+    width: 60px;
+    height: 40px;
+    display: none;  /* Hide zoom level display */
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+} 

@@ -67,8 +67,12 @@ function PublicationsPage() {
 }
 
 function App() {
+  const basename = import.meta.env.PROD ? '/stp_general/' : '/';
+  console.log('Current environment PROD:', import.meta.env.PROD);
+  console.log('Using basename for Router:', basename);
+
   return (
-    <Router>
+    <Router basename={basename}>
       <div className="site-container">
         <SiteHeader />
         <div className="app-layout">

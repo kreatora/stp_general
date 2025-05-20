@@ -170,8 +170,15 @@ const OntologyVisualization: React.FC = () => {
   }, []);
   
   useEffect(() => {
-    fetch('/ontology_tree.json')
-      .then(response => response.json())
+    const dataUrl = `${import.meta.env.BASE_URL}ontology_tree.json`;
+    console.log(`Fetching data from: ${dataUrl}`); // Log the actual URL
+    fetch(dataUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data: OntologyDataNode) => {
         console.log("Fetched ontology data:", data); // DEBUG
         nodeCounterRef.current = 0; // Reset counter

@@ -147,7 +147,7 @@ const OntologyVisualization: React.FC = () => {
       parentId,
       isRoot,
       visible: isRoot, // Only root is visible initially
-      collapsed: !isRoot, // All non-root nodes start collapsed (children hidden)
+      collapsed: true, // All nodes, including root, start collapsed
       children: [], // Will be populated by recursive calls
     };
 
@@ -264,33 +264,58 @@ const OntologyVisualization: React.FC = () => {
       // Clicked a non-end node (collapsible node)
       setCurrentlyZoomedNodeId(null); // Reset any end-node zoom
 
-      // Toggle visibility of immediate children
       const newCollapsedState = !clickedNode.collapsed;
+
+      // If expanding this node, first collapse its siblings
+      if (!newCollapsedState) { // Only when expanding (newCollapsedState is false)
+        const siblings = newNodes.filter(
+          n => n.parentId === clickedNode.parentId && n.id !== clickedNodeId && !n.collapsed
+        );
+
+        siblings.forEach(siblingToCollapse => {
+          const descendantIdsOfSibling = getDescendantIds(siblingToCollapse.id, newNodes);
+          newNodes = newNodes.map(n => {
+            if (n.id === siblingToCollapse.id) {
+              return { ...n, collapsed: true, visible: true }; // Sibling itself remains visible but collapsed
+            }
+            if (descendantIdsOfSibling.includes(n.id)) {
+              return { ...n, visible: false, hiddenByCollapse: true, collapsed: true };
+            }
+            return n;
+          });
+        });
+      }
       
       newNodes = newNodes.map(n => {
         if (n.id === clickedNodeId) {
           return { ...n, collapsed: newCollapsedState };
         }
-        // If collapsing, hide all descendants
-        if (n.parentId === clickedNodeId) {
-           return { ...n, visible: !newCollapsedState, hiddenByCollapse: newCollapsedState };
+        // If collapsing the clicked node, hide its direct children
+        if (n.parentId === clickedNodeId && newCollapsedState) {
+           return { ...n, visible: false, hiddenByCollapse: true };
+        }
+        // If expanding the clicked node, show its direct children
+        if (n.parentId === clickedNodeId && !newCollapsedState) {
+            return { ...n, visible: true, hiddenByCollapse: false };
         }
         return n;
       });
       
-      // If we just collapsed the clickedNode, we need to hide all its descendants
-      if (newCollapsedState) {
+      // Handle descendants for the clicked node
+      if (newCollapsedState) { // If we just collapsed the clickedNode
           const allDescendantIdsToHide = getDescendantIds(clickedNodeId, newNodes);
           newNodes = newNodes.map(n => {
               if (allDescendantIdsToHide.includes(n.id)) {
-                  return { ...n, visible: false, hiddenByCollapse: true, collapsed: true }; // Also mark them as collapsed
+                  // Ensure descendants are also marked as collapsed and hiddenByCollapse
+                  return { ...n, visible: false, hiddenByCollapse: true, collapsed: true }; 
               }
               return n;
           });
-      } else {
-          // If we expanded, ensure direct children are visible and not marked hiddenByCollapse (if their parent is now expanded)
+      } else { // If we just expanded the clickedNode
            newNodes = newNodes.map(n => {
               if (n.parentId === clickedNodeId) {
+                  // Direct children are made visible and their hiddenByCollapse is false
+                  // Their own collapsed state remains as is (they might have been individually collapsed before parent)
                   return { ...n, visible: true, hiddenByCollapse: false };
               }
               return n;
@@ -393,7 +418,7 @@ const OntologyVisualization: React.FC = () => {
       setNodes(prevNodes => prevNodes.map(n => ({
           ...n,
           visible: n.isRoot ? true : false,
-          collapsed: !n.isRoot,
+          collapsed: true, // All nodes, including root, are collapsed on reset
           hiddenByCollapse: !n.isRoot
       })));
       // Let centerOnNodes calculate the scale for reset too

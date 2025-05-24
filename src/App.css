@@ -16,152 +16,303 @@ body {
 }
 
 #root {
-  max-width: 100%;
-  width: 100%; /* Ensure full width */
-  margin: 0; /* Ensure no margin */
+  width: 100%;
+  margin: 0;
   padding: 0;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  display: flex; /* Ensure it takes full height */
+  flex-direction: column;
 }
 
 .site-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh; /* Use height instead of min-height for a fixed viewport boundary */
+  overflow: hidden; /* Prevent .site-container itself from scrolling */
+  background-color: #4A4A3A;
 }
 
 .site-header {
-  height: 5vh; /* 5% of viewport height */
-  width: 100%;
-  background-color: darkgreen; /* Dark green */
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #1A3A1A; /* Existing dark green, should contrast with #4A4A3A */
+  color: #E8F5E9; /* Light text */
+  padding: 0.75rem 1.5rem;
   text-align: center;
+  border-bottom: 1px solid #2A522A; /* Existing separator, should be fine */
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
 }
 
-.app-layout {
-  display: flex;
-  flex: 1; /* Make app-layout fill space between banner and footer */
-  /* min-height: 100vh; Removed as site-container now handles this */
-  background: #f0f2f5;
+.site-header p {
+  margin: 0;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
-.sidebar {
-  width: 220px;
-  background: #2d7c2d;
-  color: #fff;
-  padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+.top-navigation-bar {
+  background-color: #224222; /* Existing dark green, should contrast */
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid #2A522A;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.sidebar ul {
+
+.top-navigation-bar ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%;
+  display: flex;
+  justify-content: center; /* Center navigation items */
+  gap: 1.5rem; /* Space between nav items */
 }
-.sidebar li {
-  margin-bottom: 1.5rem;
+
+.top-navigation-bar li {
+  margin: 0;
 }
-.sidebar a {
-  color: #fff;
+
+.top-navigation-bar a {
+  color: #D8E0D8; /* Beige for navigation links */
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1em;
   font-weight: 500;
-  transition: color 0.2s;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
 }
-.sidebar a:hover {
-  color: #ffdc00;
+
+.top-navigation-bar a:hover,
+.top-navigation-bar a:focus,
+.top-navigation-bar a.active { 
+  color: #E8F5E9; /* Brighter beige/off-white on hover/active */
+  border-bottom-color: #E8F5E9; /* Matching border highlight */
+}
+
+.app-layout {
+  display: flex; /* Keep as flex container to position main-content */
+  flex-direction: column; /* Stack children vertically if any besides main-content */
+  flex: 1;       /* Allow app-layout to fill space between header/nav and footer */
+  overflow-y: auto; /* THIS will be the main scrollable area */
+  min-height: 0; /* Crucial for scrolling within a 100vh flex parent */
 }
 
 .main-content {
   flex: 1;
-  padding: 3rem 2rem;
-  display: flex;
+  padding: 1.5rem;
+  display: flex; 
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  overflow-y: auto; 
+  /* min-height: 0; */ /* If .app-layout has this, .main-content might not need it directly unless it also has fixed height children and flex-grow children */
 }
 
-.landing-page {
-  max-width: 700px;
-  margin: 0 auto;
-  background: #fff;
-  padding: 2.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  text-align: left;
+/* Styles for specific page types, e.g., Landing, Ontology */
+.landing-page,
+.ontology-page,
+.worldmap-page,
+.generic-page {
+  background: #D8E0D8; /* Light Green/Beige accent for content boxes */
+  color: #2A3A2A; /* Dark text for readability on light beige */
+  padding: 1.5rem 2rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* Softer shadow for lighter background */
+  border: 1px solid #B0C0B0; /* Border to complement beige */
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0; /* Add this to help its own flex children (like OntologyVisualization) size correctly */
 }
-.landing-page h1 {
-  color: #2d7c2d;
-  margin-bottom: 1rem;
+
+.landing-page h1,
+.ontology-page h2,
+.worldmap-page h2,
+.generic-page h2 {
+  color: #1A3A1A; /* Dark green headings on beige background */
+  margin-top: 0;
+  flex-shrink: 0; /* Prevent h2 from shrinking */
+  border-bottom-color: #B0C0B0; /* Complementing border for headings */
 }
+
 .landing-page p {
-  font-size: 1.2rem;
-  color: #333;
-}
-
-.ontology-page, .worldmap-page, .generic-page {
-  background: #fff;
-  padding: 2rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  margin-top: 1.5rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.ontology-page h2, .worldmap-page h2, .generic-page h2 {
-  color: #2980b9;
-  margin-bottom: 1rem;
+  font-size: 1.1em;
+  color: #2A3A2A; /* Dark text for paragraphs on beige background */
+  line-height: 1.7;
 }
 
 .footer {
-  height: 3vh; /* 3% of viewport height */
-  width: 100%;
-  background-color: lightgreen; /* Light green */
-  color: black; /* Ensure text is visible on light green */
+  background-color: #1A3A1A; /* Existing dark green, should contrast */
+  color: #B0C0B0; /* Muted light text for footer */
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid #2A522A; /* Darker green separator */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9em;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* Removed .sidebar styles */
+/* Removed .logo and animation styles as they didn't seem to be in use by App.tsx */
+/* Removed generic .card style from App.css as OntologyVisualization.css handles its own cards */
+/* Removed .read-the-docs */
+
+/* Ensure the direct parent of OntologyVisualization allows it to grow */
+.ontology-page > div:not(h2) { /* This is a bit of a hack, ideally OntologyVisualization itself would be display:flex */
+  /* flex-grow: 1; */ /* Let the container of OntologyVisualization grow - this might not be needed if OntologyVisualization is correctly structured */
+}
+
+/* Adjusted landing page container to be more generic for sections */
+.landing-page-content { 
+  background: #D8E0D8;
+  color: #2A3A2A;
+  padding-top: 1.5rem; /* Retain some top/bottom padding for the full-width beige area */
+  padding-bottom: 1.5rem;
+  width: 100%; 
+  display: flex; /* Make it a flex container to center the inner content if needed, though auto margins on inner should work */
+  flex-direction: column;
+  align-items: center; /* Helps if inner content doesn't take full width and needs centering */
+  flex-grow: 1; 
+}
+
+.landing-page-inner-content { /* New wrapper for actual content */
+  max-width: 1200px; /* Or your preferred width like 1100px, 960px */
+  width: 100%; /* Takes full width up to max-width */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; /* Side padding for content within the centered block */
+  padding-right: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center; /* Fallback */
+  flex-direction: column;
+  gap: 2.5rem; /* This gap is for sections within the inner content */
+}
+
+.homepage-section {
+  width: 100%;
+}
+
+.section-title {
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
+  font-size: 1.6em; /* Slightly smaller than page h2 for section titles */
+  color: #1A3A1A; /* Dark green headings on beige background */
+  margin-bottom: 1rem;
+  padding-bottom: 0.25em;
+  border-bottom: 2px solid #B0C0B0; /* Match heading border in index.css, but slightly thicker */
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Keep smaller card size */
+  gap: 1.5rem;
+}
+
+.content-card {
+  background-color: #E8F5E9; /* Very light beige/off-white for cards */
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #C8D0C8;
+  transition: box-shadow 0.3s ease;
+}
+
+.content-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.card-image-placeholder {
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background-color: #B0C0B0; /* Placeholder color for image area */
+  /* In future, you can use background-image: url(imageUrl); */
+}
+
+.card-text {
+  padding: 1rem;
+  font-size: 0.95em;
+  color: #2A3A2A; /* Dark text on light card */
+  line-height: 1.5;
+  flex-grow: 1; /* Allows text to take available space if cards vary in height */
+}
+
+/* Contact Panel Styles */
+.contact-section {
+  margin-top: 1.5rem; /* Extra space before contact section */
+}
+
+.contact-panel {
+  background-color: #E8F5E9; /* Consistent light card background */
+  padding: 2rem;
+  border-radius: 6px;
+  border: 1px solid #C8D0C8;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #1A3A1A; /* Dark green label text */
+  margin-bottom: 0.5rem;
+  font-size: 1em;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #B0C0B0;
+  border-radius: 4px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1em;
+  color: #2A3A2A;
+  background-color: #FFFFFF; /* White background for input fields */
+  box-sizing: border-box; /* Ensure padding doesn't increase width */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #5A825A; /* Darker green border on focus */
+  box-shadow: 0 0 0 2px rgba(58, 98, 58, 0.2);
+  outline: none;
+}
+
+.submit-button {
+  /* Uses global button styles from index.css by default */
+  /* Override if specific styling needed for this button */
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  /* background-color: #2A522A; */ /* Global button color */
+  /* color: #E8F5E9; */ /* Global button text color */
+  width: 100%; /* Make button full width */
+  margin-top: 0.5rem;
+}
+
+/* Other page styles (ontology-page, worldmap-page, generic-page) */
+.ontology-page,
+.worldmap-page,
+.generic-page {
+  background: #D8E0D8;
+  color: #2A3A2A;
+  padding: 1.5rem 2rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  border: 1px solid #B0C0B0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0; /* Add this to help its own flex children (like OntologyVisualization) size correctly */
+}
+
+/* Specific h2 for these pages from previous state */
+.ontology-page h2,
+.worldmap-page h2,
+.generic-page h2 {
+  color: #1A3A1A;
+  margin-top: 0;
+  flex-shrink: 0;
+  border-bottom-color: #B0C0B0;
 }

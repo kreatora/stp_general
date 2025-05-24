@@ -1,11 +1,12 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Base font for the entire website, favoring scholarly serifs */
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
+  line-height: 1.6; /* Increased line height for better readability */
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Theme Base */
+  color: #E8F5E9; /* Primary text color - light off-white/green */
+  background-color: #4A4A3A; /* Intermediate dark olive/brownish-green background */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +14,86 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column; /* Ensure footer can stick to bottom if content is short */
   min-height: 100vh;
+  color: #E8F5E9; /* Ensure consistent text color */
+  background-color: #4A4A3A; /* Consistent intermediate background */
+}
+
+/* General link styles for dark theme */
+a {
+  color: #D8E0D8; /* Beige for link text */
+  text-decoration: none; /* Remove underline by default */
+  transition: color 0.2s ease;
+}
+
+a:hover, a:focus {
+  color: #E8F5E9; /* Brighter beige/off-white on hover/focus */
+  text-decoration: underline; /* Add underline on hover/focus for clarity */
+}
+
+/* Headings for dark theme */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Georgia', 'Times New Roman', Times, serif; /* Consistent serif for headings */
+  color: #E8F5E9; /* Light text for headings, still contrasts with #4A4A3A */
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.2em; /* Slightly reduced for a more academic feel */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+h2 {
+  font-size: 1.8em;
+  border-bottom: 1px solid #5A5A4A; /* Adjusted separator for new background */
+  padding-bottom: 0.3em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+/* Basic button styling for dark theme */
+button, input[type="button"], input[type="submit"] {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sans-serif for UI controls can be clearer */
+  border-radius: 4px;
+  border: 1px solid #6A6A5A; /* Adjusted border for buttons */
   padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 0.95em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #5A5A4A; /* Button background, slightly lighter than main BG */
+  color: #E8F5E9; /* Light text on buttons */
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+  background-color: #6A6A5A; /* Slightly lighter on hover */
+  border-color: #7A7A6A;
+}
+
+button:focus, button:focus-visible,
+input[type="button"]:focus, input[type="button"]:focus-visible,
+input[type="submit"]:focus, input[type="submit"]:focus-visible {
+  outline: 2px solid #D8E0D8; /* Beige focus indicator */
+  outline-offset: 1px;
+}
+
+/* Remove default browser focus style if custom one is applied */
+*:focus-visible {
+  outline: none;
+}
+
+/* Global container for consistent padding if needed */
+.page-container {
+    width: 100%;
+    max-width: 1200px; /* Max width for content area for better readability on large screens */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
 }

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import OntologyVisualization from './components/OntologyVisualization';
+import studentAssistantImageFile from "/images/team/student.jpeg"; // Import the image
 
 function SiteHeader() {
   return (
@@ -56,7 +57,7 @@ function Landing() {
   const profPlaceholder = "https://via.placeholder.com/250x250.png?text=Professor";
   const fellowPlaceholder = "https://via.placeholder.com/250x250.png?text=Fellow";
   // Your specific student image path
-  const studentAssistantImage = "/images/team/student.jpeg";
+  // const studentAssistantImage = "/images/team/student.jpeg"; // Old way
   const otherStudentPlaceholder = "https://via.placeholder.com/250x250.png?text=Assistant";
 
   return (
@@ -87,7 +88,7 @@ function Landing() {
           <div className="card-grid">
             <ContentCard title="Prof. Lorem Ipsum - Lead Researcher" imageUrl={profPlaceholder} />
             <ContentCard title="Dr. Dolor Sit Amet - Senior Fellow" imageUrl={fellowPlaceholder} />
-            <ContentCard title="Student Assistant Consectetur" imageUrl={studentAssistantImage} />
+            <ContentCard title="Student Assistant Consectetur" imageUrl={studentAssistantImageFile} />
             <ContentCard title="Student Assistant Adipiscing" imageUrl={otherStudentPlaceholder} />
           </div>
         </section>

@@ -1,0 +1,252 @@
+/* Remove global body styles that interfere with page layout */
+#ontology-container {
+    font-family: 'Georgia', 'Times New Roman', Times, serif; /* Classic serif font for ontology only */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+}
+
+.viewport {
+    width: 100%;
+    flex-grow: 1; /* This should make it take available vertical space */
+    min-height: 500px; /* Re-added a safety min-height, slightly larger */
+    overflow: hidden;
+    position: relative;
+    background: #D8E0D8; /* Light Green/Beige for viewport background */
+    border: 1px solid #B0C0B0; /* Border to complement beige */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* Softer shadow */
+    cursor: grab;
+    display: flex; /* Make viewport a flex container if its children need flex layout */
+    flex-direction: column; /* (If its children are stacked, e.g. visualization-container and zoom-controls) */
+}
+
+.visualization-container {
+    flex-grow: 1; /* This should expand within the viewport */
+    position: relative; /* Changed from absolute for better flow in flex parent */
+    overflow: visible;
+    background: transparent; /* Transparent, so viewport color shows through */
+    /* Subtle dark green grid lines for light beige background */
+    background-image: radial-gradient(rgba(42, 58, 42, 0.2) 0.5px, transparent 0.5px);
+    background-size: 25px 25px; /* Adjusted grid size slightly */
+    transform-origin: 0 0;
+    left: 0;
+    top: 0;
+}
+
+.card {
+    position: absolute;
+    width: 260px; /* Slightly wider for serif fonts */
+    height: auto; /* Adjust height based on content */
+    min-height: 150px;
+    background: #1A3A1A; /* Dark green cards (contrast with beige viewport) */
+    border-radius: 4px; /* Less rounded, more formal */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    padding: 15px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border: 1px solid #3A623A; /* Darker green border for cards */
+    z-index: 10;
+    cursor: pointer;
+    overflow: hidden; /* Hide overflow, text will be managed by card-definition */
+    user-select: none;
+    pointer-events: auto;
+    color: #E8F5E9; /* Light text on dark green cards */
+}
+
+.card-definition {
+    font-size: 15px; /* Slightly larger for serif readability */
+    color: #E8F5E9; /* Light text for definition */
+    line-height: 1.5;
+    padding-right: 20px; /* Space for expand icon if needed */
+    max-height: 120px; /* Allow for a few lines of text */
+    overflow-y: auto; /* Scroll if definition is long */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Custom scrollbar for card definition - dark theme (for dark cards) */
+.card-definition::-webkit-scrollbar {
+    width: 6px;
+}
+.card-definition::-webkit-scrollbar-track {
+    background: #1A3A1A; /* Match card background */
+}
+.card-definition::-webkit-scrollbar-thumb {
+    background: #3A623A; /* Darker green scrollbar thumb */
+    border-radius: 3px;
+}
+
+.card.hidden {
+    display: none;
+}
+
+.expand-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background: #2A522A; /* Dark green background for icon on dark card */
+    color: #E8F5E9; /* Light icon color */
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    border: 1px solid #3A623A;
+    box-shadow: none;
+}
+
+.expand-icon::after {
+    content: '+'; /* Plus for expand */
+    display: block;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+}
+
+.card:not(.collapsed) .expand-icon::after {
+    content: '−'; /* Minus for collapse (Unicode U+2212) */
+}
+
+/* No rotation needed for + / - icons */
+/*.card.collapsed .expand-icon::after {
+    transform: rotate(-90deg);
+}*/
+
+.card:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.25);
+    border-color: #4A724A; /* Slightly lighter green border on hover */
+    /* transform: translateY(-1px); */ /* Subtle lift, optional */
+}
+
+.card.root-card {
+    border-color: #90EE90; /* LightGreen border for root card (stands out on dark card) */
+    background: #204020; /* Slightly different dark green for root */
+}
+
+
+/* Remove unused styles */
+.card-title, .card-id {
+    display: none;
+}
+
+.connection-line {
+    position: absolute;
+    height: 1.5px; /* Thinner lines */
+    transform-origin: 0 0;
+    pointer-events: none;
+    z-index: 1; /* Ensure lines are below cards but above container grid */
+}
+
+/* Connection lines for dark theme - shades of light green/gray (visible on beige BG) */
+.connection-line-level-0 {
+    background: #3A623A; /* Darker green lines for good contrast on beige */
+    height: 2px;
+}
+.connection-line-level-1 {
+    background: #4A724A;
+}
+.connection-line-level-2 {
+    background: #5A825A;
+}
+.connection-line-level-3 {
+    background: #6A926A;
+}
+.connection-line-level-4 {
+    background: #7AA27A;
+}
+.connection-line-level-5 {
+    background: #8AB28A; /* Lightest of these dark greens */
+}
+
+.zoom-controls {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    background: rgba(216, 224, 216, 0.85); /* Semi-transparent light beige */
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    border: 1px solid #B0C0B0;
+}
+
+.zoom-button {
+    display: none; /* Still hidden */
+    /* Styles for zoom buttons if they were enabled */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    /* border: 1px solid #B0C0B0; */
+    /* border-radius: 4px; */
+    /* background: #E8F5E9; */ /* Very light button background */
+    /* color: #1A3A1A; */ /* Dark green text */
+    /* padding: 8px 12px; */
+}
+
+.reset-button {
+    display: flex !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 4px;
+    border: 1px solid #90a090; /* Slightly darker border for button */
+    padding: 0.6em 1.2em;
+    font-size: 0.9em;
+    font-weight: 500;
+    background-color: #e0e8e0; /* Pale greenish-beige button */
+    color: #1A3A1A; /* Dark green text */
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.reset-button:hover {
+    background-color: #c8d0c8; /* Slightly darker on hover */
+    border-color: #7a8a7a;
+}
+
+.zoom-level {
+    width: 60px;
+    height: auto;
+    padding: 8px 0;
+    display: none;  /* Hide zoom level display */
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: normal;
+    color: #2A3A2A; /* Dark text for zoom level if shown */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Banner styles - adjust as needed or remove if not used */
+.left-banner, .top-banner {
+    display: none; /* Hiding banners for a cleaner academic look, can be re-enabled */
+    /*
+    position: fixed;
+    z-index: 1001;
+    max-width: 200px;
+    padding: 10px;
+    */
+}
+
+/*.left-banner {
+    top: 0;
+    left: 0;
+}
+
+.top-banner {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 400px;
+}*/
+
+/* Ensure root card visibility if it was an issue */
+.card.root-card {
+    display: block !important;
+}
+
+.card.root-card .card-definition {
+    display: block !important;
+} 

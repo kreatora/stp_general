@@ -5,14 +5,14 @@ import { resolve } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: './',
   build: {
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         ontology: resolve(__dirname, 'ontology.html'),
-        worldMap: resolve(__dirname, 'world-map.html'),
         data: resolve(__dirname, 'data.html'),
-        publications: resolve(__dirname, 'publications.html'),
+        aboutUs: resolve(__dirname, 'about-us.html'),
       },
     },
   },

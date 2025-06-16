@@ -4,156 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustainability Transition</title>
-  <link rel="stylesheet" crossorigin href="/assets/output-nR1b5a-m.css">
+    <link rel="stylesheet" href="dist/output.css">
+    <style>
+        .btn-custom {
+            background-color: rgb(100, 140, 88);
+        }
+        .btn-custom:hover {
+            background-color: rgb(141, 192, 133);
+        }
+        .bg-custom {
+            background-color: rgb(221, 227, 214);
+        }
+        .nav-custom {
+            background-color: rgb(50, 70, 53);
+        }
+        .text-custom {
+            color: oklch(0.99 0.02 97.77);
+        }
+        .active-nav {
+            border-bottom: 2px solid oklch(0.99 0.02 97.77);
+            padding-bottom: 2px;
+        }
+        .nav-item-hover {
+            padding-bottom: 2px;
+        }
+        .nav-item-hover:hover {
+            box-shadow: 0 2px 0 0 rgba(255, 255, 255, 0.7);
+        }
+        .title-underline {
+            border-bottom: 1px solid rgb(42, 58, 42);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        .wind-turbine {
+            position: absolute;
+            left: 10vw;
+            top: 25vh;
+            width: 8vw;
+            height: 8vw;
+            z-index: 10;
+        }
+        .wind-turbine-bottom {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            transform: rotate(-5deg);
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+        }
+        .solar-panel-right-bottom {
+            position: absolute;
+            right: 10vw;
+            bottom: 15vh;
+            transform: rotate(8deg);
+            width: 8vw;
+            height: 8vw;
+            z-index: 10;
+        }
+        .solar-panel-right-top {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            transform: rotate(-12deg);
+            width: 120px;
+            height: 120px;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body class="bg-stone-800 text-neutral-700 font-serif">
     <header class="text-white">
         <div class="bg-[rgb(42,58,42)] py-6">
             <div class="container mx-auto text-center">
-                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-stone-200">OUR3 VERY IMPORTANT FINDINGS ON SUSTAINABILITY TRANSITION</h1>
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-custom">Climate Policy Atlas</h1>
             </div>
         </div>
-        <div class="bg-[rgb(52,68,52)] py-4">
+        <div class="nav-custom py-4">
             <nav class="container mx-auto text-center">
                 <ul class="flex justify-center space-x-4 md:space-x-6">
-                    <li><a href="index.html" class="text-stone-100 hover:text-stone-300 transition-colors duration-200">Home</a></li>
-                    <li><a href="ontology.html" class="text-stone-100 hover:text-stone-300 transition-colors duration-200">Ontology</a></li>
-                    <li><a href="world-map.html" class="text-stone-100 hover:text-stone-300 transition-colors duration-200">World Map</a></li>
-                    <li><a href="data.html" class="text-stone-100 hover:text-stone-300 transition-colors duration-200">Data</a></li>
-                    <li><a href="publications.html" class="text-stone-100 hover:text-stone-300 transition-colors duration-200">Publications</a></li>
+                    <li><a href="index.html" class="text-custom hover:text-white transition-colors duration-200 active-nav nav-item-hover">Home</a></li>
+                    <li><a href="ontology.html" class="text-custom hover:text-white transition-colors duration-200 nav-item-hover">Ontology</a></li>
+                    <li><a href="data.html" class="text-custom hover:text-white transition-colors duration-200 nav-item-hover">Data</a></li>
+                    <li><a href="about-us.html" class="text-custom hover:text-white transition-colors duration-200 nav-item-hover">About Us</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="p-4 md:p-8 bg-neutral-200 min-h-screen">
-        <section class="publications mb-12 md:mb-16 max-w-[1792px] mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-[rgb(42,58,42)] mb-6 md:mb-8">Our Publications</h2>
-            <hr class="mt-1 mb-6 border-green-700 opacity-50">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing...</p>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">t amet, consectetur adipiscing elit, sed do eiusmo...</p>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">m dolor sit amet, consectetur adipiscing elit, sed...</p>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">nsectetur adipiscing elit, sed do eiusmod tempor i...</p>
-                    </div>
-                </div>
+    <main class="p-4 md:p-8 bg-custom min-h-screen relative">
+        <section class="max-w-3xl mx-auto py-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[rgb(42,58,42)] title-underline">Welcome!</h2>
+            
+            <div class="bg-custom p-8 md:p-10 rounded-lg shadow-xl mb-6 mx-auto max-w-4xl text-center">
+                <p class="text-lg mb-6 text-neutral-700">We are pleased to present our Renewable Energy (RE) Policy Ontology, developed as a contribution to the NFDI4Energy project. Our primary aim was to create a structured, semantic framework that enhances the understanding, comparison, and analysis of diverse renewable energy policies, making complex information more accessible and interoperable.</p>
+            </div>
+
+            <div class="mb-8 flex justify-center">
+                <img src="./images/nfdi4energy_logo_cut.png" alt="NFDI4Energy Logo" style="width: 150px; height: auto;">
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="ontology.html" class="px-12 py-6 btn-custom text-custom text-2xl font-medium rounded-lg transition-colors duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">Explore Ontology</a>
+                <a href="data.html" class="px-12 py-6 btn-custom text-custom text-2xl font-medium rounded-lg transition-colors duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">View Data</a>
             </div>
         </section>
 
-        <section class="work-in-progress mb-12 md:mb-16 max-w-[1792px] mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-[rgb(42,58,42)] mb-6 md:mb-8">Our Work in Progress</h2>
-            <hr class="mt-1 mb-6 border-green-700 opacity-50">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">or sit amet, consectetur adipiscing elit, sed do e...</p>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">t, consectetur adipiscing elit, sed do eiusmod tem...</p>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">etur adipiscing elit, sed do eiusmod tempor incidi...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="team mb-12 md:mb-16 max-w-[1792px] mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-[rgb(42,58,42)] mb-6 md:mb-8">Our Team</h2>
-            <hr class="mt-1 mb-6 border-green-700 opacity-50">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">Prof. Lorem Ipsum - Lead Researcher</p>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">Dr. Dolor Sit Amet - Senior Fellow</p>
-                    </div>
-                </div>
-                <!-- Card 3 with actual image -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <img src="public/images/cat_image.jpg" alt="Student Assistant Consectetur" class="w-full h-52 object-cover">
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">Student Assistant Consectetur</p>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="bg-stone-50 rounded-lg overflow-hidden">
-                    <div class="bg-[rgb(176,192,176)] h-52"></div> <!-- Placeholder for image -->
-                    <div class="p-3 md:p-4">
-                        <p class="text-neutral-700 text-sm">Student Assistant Adipiscing</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact p-6 md:p-8 rounded-lg">
-            <h2 class="text-2xl md:text-3xl font-bold text-[rgb(42,58,42)] mb-6 md:mb-8 text-center">Contact Us</h2>
-            <hr class="mt-1 mb-6 border-green-700 opacity-50 w-1/3 mx-auto">
-            <form action="#" method="POST" class="space-y-6 max-w-xl mx-auto">
-                <div class="form-group">
-                    <label for="email" class="block text-sm font-medium text-[rgb(42,58,42)] mb-1">Your Email</label>
-                    <input type="email" id="email" name="email" required class="block w-full px-3 py-2 border border-neutral-300 bg-white text-neutral-900 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                </div>
-                <div class="form-group">
-                    <label for="topic" class="block text-sm font-medium text-[rgb(42,58,42)] mb-1">Topic</label>
-                    <input type="text" id="topic" name="topic" required class="block w-full px-3 py-2 border border-neutral-300 bg-white text-neutral-900 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                </div>
-                <div class="form-group">
-                    <label for="message" class="block text-sm font-medium text-[rgb(42,58,42)] mb-1">Message</label>
-                    <textarea id="message" name="message" rows="5" required class="block w-full px-3 py-2 border border-neutral-300 bg-white text-neutral-900 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"></textarea>
-                </div>
-                <div>
-                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-700 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">Send Message</button>
-                </div>
-            </form>
-        </section>
-
+        <!-- Wind Turbine Image -->
+        <div class="wind-turbine">
+            <img src="./images/windturbine.png" alt="Wind Turbine" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        
+        <!-- Solar Panel - Right Bottom -->
+        <div class="solar-panel-right-bottom">
+            <img src="./images/solarpanel.png" alt="Solar Panel" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
     </main>
 
 </body>

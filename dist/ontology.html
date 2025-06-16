@@ -264,7 +264,7 @@
         // Load ontology data for list view
         async function loadOntologyData() {
             try {
-                const response = await fetch('/ontology_summary.json');
+                const response = await fetch('ontology_summary.json');
                 ontologyData = await response.json();
                 populateListView();
             } catch (error) {

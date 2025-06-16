@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import './OntologyVisualization.css';
+import './ontologyvisualization.css';
 
 interface OntologyDataNode {
   name: string; // Changed from label to name to match json

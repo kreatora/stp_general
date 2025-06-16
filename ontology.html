@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ontology - Sustainability Transition</title>
-    <link rel="stylesheet" href="/src/input.css">
+    <link rel="stylesheet" href="src/input.css">
     <style>
         .btn-custom {
             background-color: rgb(100, 140, 88);
@@ -255,7 +255,7 @@
         </section>
     </main>
 
-    <script type="module" src="/src/ontology-loader.tsx"></script>
+    <script type="module" src="src/ontology-loader.tsx"></script>
     <script>
         let ontologyData = null;
         let currentView = 'tree';
@@ -263,7 +263,7 @@
         // Load ontology data for list view
         async function loadOntologyData() {
             try {
-                const response = await fetch('/ontology_summary.json');
+                const response = await fetch('ontology_summary.json');
                 ontologyData = await response.json();
                 populateListView();
             } catch (error) {
